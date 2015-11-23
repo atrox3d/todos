@@ -4,6 +4,7 @@ if (Meteor.isClient) {
 			event.preventDefault();
 			console.log('logout');
 			Meteor.logout();
+			Router.go('login');
 		}
 	});
 }
