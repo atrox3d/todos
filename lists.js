@@ -6,7 +6,8 @@ if (Meteor.isClient) {
 
     Template.lists.helpers({
         'list' : function () {
-            return Lists.find();
+            var currentUser = Meteor.userId();
+            return Lists.find({createdBy:currentUser});
         }
     });
 
@@ -15,10 +16,11 @@ if (Meteor.isClient) {
         'submit form' : function (event) {
             console.log('add list');
             event.preventDefault();
-
+            var currentUser = Meteor.userId();
             var listName = $('[name="listName"]').val();
             Lists.insert({
                 name: listName,
+                createdBy: currentUser
             }, function (error, result){
                 Router.go('listPage', {_id: result});
             }

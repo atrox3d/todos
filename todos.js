@@ -5,8 +5,10 @@ if (Meteor.isClient) {
     Template.todos.helpers({
         'todo' : function () {
             var currentList = this._id;
+            var currentUser = Meteor.userId();
             return Todos.find({
-                listId: currentList
+                listId: currentList,
+                createdBy: currentUser
             });
         }
     });
@@ -23,10 +25,13 @@ if (Meteor.isClient) {
 
             var todoName = $('[name="todoName"]').val();
             var currentList = this._id;
+            var currentUser = Meteor.userId();
+
             Todos.insert({
                 name: todoName,
                 completed: false,
                 createdAt: new Date(),
+                createdBy: currentUser,
                 listId: currentList,
             });
             $('[name="todoName"]').val('');
