@@ -14,8 +14,38 @@ Router.route('/list/:_id', {
     name: 'listPage',
     template: 'listPage',
     data: function () {
+        var currentList = this.params._id;
+        var currentUser = Meteor.userId();
+
         return Lists.findOne({
-            _id: this.params._id
+            _id: currentList,
+            createdBy: currentUser
         });
-    }
+    },
+
+    onBeforeAction: function() {
+        var currentUser = Meteor.userId();
+
+        if(currentUser) {
+            console.log("onBeforeAction logged");
+            this.next();
+        } else {
+            console.log("onBeforeAction not logged");
+            this.render("login");
+        }
+    },
+
+    onRun: function() {
+        console.log("onRun");
+        this.next();
+    },
+
+    onReRun: function() {
+        console.log("onReRun");
+        this.next();
+    },
+
+    onStop: function() {
+        console.log("onStop");
+    },
 });
