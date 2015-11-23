@@ -1,0 +1,23 @@
+<template name="lists">
+    {{>addList}}
+    <ul>
+            {{#each list}}
+            <li>
+                <a href="{{pathFor route='listPage'}}">{{name}}</a>
+            </li>
+            {{/each}}
+    </ul>
+</template>
+
+<template name="addList">
+    <form >
+        Create a list:
+        <input type="text" name="listName" placeholder="List name here...">
+    </form>
+</template>
+
+<template name="listPage">
+    <h2>tasks: {{name}}</h2>
+    {{>todos}}
+</template>
+

@@ -1,0 +1,32 @@
+<template name="register">
+    <h2>register</h2>
+</template>
+
+<template name="login">
+    <h2>login</h2>
+</template>
+
+<template name="home">
+    <p>
+        welcome to the todos application
+    </p>
+</template>
+
+<template name="main">
+    <h1>todos</h1>
+    {{>navigation}}
+    {{>lists}}
+    {{>yield}}
+    <hr>
+    <p>
+        copyright &copy; blah blah blah
+    </p>
+</template>
+
+<template name="navigation">
+    <ul>
+        <li><a href="{{pathFor route='home'}}">Home</a></li>
+        <li><a href="{{pathFor route='register'}}">Register</a></li>
+        <li><a href="{{pathFor route='login'}}">Login</a></li>
+    </ul>
+</template>

@@ -1,0 +1,23 @@
+<template name="todos">
+    {{>addTodo}}
+    <ul>
+            {{#each todo}}
+                {{>todoItem}}
+            {{/each}}
+    </ul>
+</template>
+
+<template name="todoItem">
+    <li>
+        <input type="checkbox">
+        <input type="text" name="todoItem" value="{{name}}">
+        [<a href="#" class="delete-todo">delete</a>]
+    </li>
+</template>
+
+<template name="addTodo">
+    <form >
+        Create a task:
+        <input type="text" name="todoName" placeholder="Type a task here...">
+    </form>
+</template>
