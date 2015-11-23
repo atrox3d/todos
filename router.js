@@ -2,6 +2,22 @@ Router.configure({
     layoutTemplate: 'main',
 });
 
+Router.onBeforeAction(function() {
+        var currentUser = Meteor.userId();
+
+        if(currentUser) {
+            console.log("onBeforeAction GLOBAL logged");
+            this.next();
+        } else {
+            console.log("onBeforeAction GLOBAL not logged");
+            this.render("login");
+        }
+    },
+    {
+        except: ['home', 'register', 'login', ]
+    }
+);
+
 Router.route('/', {
     name: 'home',
     template: 'home',
@@ -23,17 +39,17 @@ Router.route('/list/:_id', {
         });
     },
 
-    onBeforeAction: function() {
-        var currentUser = Meteor.userId();
-
-        if(currentUser) {
-            console.log("onBeforeAction logged");
-            this.next();
-        } else {
-            console.log("onBeforeAction not logged");
-            this.render("login");
-        }
-    },
+    // onBeforeAction: function() {
+    //     var currentUser = Meteor.userId();
+    //
+    //     if(currentUser) {
+    //         console.log("onBeforeAction logged");
+    //         this.next();
+    //     } else {
+    //         console.log("onBeforeAction not logged");
+    //         this.render("login");
+    //     }
+    // },
 
     onRun: function() {
         console.log("onRun");
